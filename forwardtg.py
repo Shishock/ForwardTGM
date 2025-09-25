@@ -10,13 +10,13 @@ api_hash = os.getenv('api_hash')
 SESSION_STRING = os.getenv('SESSION_STRING')
 FORWARD_TO_CHAT_ID = os.getenv('FORWARD_TO_CHAT_ID')
 
-# Создаем клиента Telegram
+# Creating a Telegram client
 client = TelegramClient(StringSession(SESSION_STRING), api_id, api_hash, system_version="4.16.30-vxMAX")
 
-# Обработчик для всех входящих сообщений
+# Handler for all incoming messages
 @client.on(events.NewMessage())
 async def forward_handler(event):
-    # Пересылаем сообщение без каких-либо проверок
+    # Forward the message without any checks
     await event.message.forward_to(FORWARD_TO_CHAT_ID)
 
 async def main():
@@ -26,4 +26,5 @@ async def main():
 
 if __name__ == '__main__':
     import asyncio
+
     asyncio.run(main())
